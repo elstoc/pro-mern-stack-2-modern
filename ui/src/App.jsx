@@ -10,3 +10,7 @@ const element = <IssueList />;
 const root = createRoot(document.getElementById('contents'));
 
 root.render(element);
+
+if (module.hot) {
+  module.hot.accept();
+}
