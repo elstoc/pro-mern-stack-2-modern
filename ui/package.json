@@ -6,8 +6,8 @@
   "scripts": {
     "start": "nodemon -w uiserver.js -w .env uiserver.js",
     "lint": "eslint . --ext js,jsx --ignore-pattern public",
-    "compile": "babel src --out-dir public",
-    "watch": "babel src --out-dir public --watch --verbose",
+    "compile": "webpack --mode production",
+    "watch": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Chris Elston",
@@ -23,6 +23,7 @@
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.5",
     "eslint": "^8.14.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
