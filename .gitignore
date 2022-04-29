@@ -3,3 +3,5 @@ package-lock.json
 .env
 node_modules
 ui/public/App.js
+ui/public/graphQLFetch.js
+ui/public/main.js
