@@ -4,5 +4,5 @@ package-lock.json
 node_modules
 ui/public/App.js
 ui/public/graphQLFetch.js
-ui/public/app.bundle.js
-ui/public/vendor.bundle.js
+ui/public/app.bundle.js*
+ui/public/vendor.bundle.js*
