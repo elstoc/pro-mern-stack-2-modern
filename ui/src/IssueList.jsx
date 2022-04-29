@@ -1,11 +1,17 @@
 import React from 'react';
+import URLSearchParams from '@ungap/url-search-params';
+import { useLocation } from 'react-router-dom';
 
 import IssueFilter from './IssueFilter.jsx';
 import IssueTable from './IssueTable.jsx';
 import IssueAdd from './IssueAdd.jsx';
 import graphQLFetch from './graphQLFetch.js';
 
-export default class IssueList extends React.Component {
+function withLocation(Component) {
+  return props => <Component {...props} location={useLocation()} />;
+}
+
+class IssueList extends React.Component {
   constructor() {
     super();
     this.state = { issues: [] };
@@ -16,15 +22,28 @@ export default class IssueList extends React.Component {
     this.loadData();
   }
 
+  componentDidUpdate(prevProps) {
+    const { location: { search: prevSearch } } = prevProps;
+    const { location: { search } } = this.props;
+    if (prevSearch !== search) {
+      this.loadData();
+    }
+  }
+
   async loadData() {
-    const query = `query {
-      issueList {
+    const { location: { search } } = this.props;
+    const params = new URLSearchParams(search);
+    const vars = {};
+    if (params.get('status')) vars.status = params.get('status');
+
+    const query = `query issueList($status: StatusType) {
+      issueList (status: $status) {
         id title status owner
         created effort due
       }
     }`;
 
-    const data = await graphQLFetch(query);
+    const data = await graphQLFetch(query, vars);
     if (data) {
       this.setState({ issues: data.issueList });
     }
@@ -57,3 +76,5 @@ export default class IssueList extends React.Component {
     );
   }
 }
+
+export default withLocation(IssueList);
