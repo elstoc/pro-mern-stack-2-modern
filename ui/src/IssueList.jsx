@@ -1,9 +1,11 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import URLSearchParams from '@ungap/url-search-params';
 
 import IssueFilter from './IssueFilter.jsx';
 import IssueTable from './IssueTable.jsx';
 import IssueAdd from './IssueAdd.jsx';
+import IssueDetail from './IssueDetail.jsx';
 import graphQLFetch from './graphQLFetch.js';
 import { withLocation } from './RouterFunctions.js';
 
@@ -68,6 +70,10 @@ class IssueList extends React.Component {
         <IssueTable issues={issues} />
         <hr />
         <IssueAdd createIssue={this.createIssue} />
+        <hr />
+        <Routes>
+          <Route path=':id' element={<IssueDetail />} />
+        </Routes>
       </React.Fragment>
     );
   }

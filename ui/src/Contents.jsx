@@ -10,7 +10,7 @@ const NotFound = () => <h1>Page Not Found</h1>;
 export default function Contents() {
   return (
     <Routes>
-      <Route path="/issues" element={<IssueList />} />
+      <Route path="/issues/*" element={<IssueList />} />
       <Route path="/report" element={<IssueReport />} />
       <Route path="/edit/:id" element={<IssueEdit />} />
       <Route path="/" element={<Navigate to="/issues" />} />
