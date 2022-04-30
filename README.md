@@ -1,0 +1,1 @@
+The issuetracker application from the pro MERN stack book (2nd edition), but upgraded to use versions of the modules available in 2022. Most changes are due to updates to react (v16-v18) and react-router-dom (v4-v6)
