@@ -1,5 +1,6 @@
 import React from 'react';
-import { withNavigate } from './RouterFunctions.js';
+import URLSearchParams from '@ungap/url-search-params';
+import { withNavigate, withLocation } from './RouterFunctions.js';
 
 class IssueFilter extends React.Component {
   constructor() {
@@ -17,11 +18,13 @@ class IssueFilter extends React.Component {
   }
 
   render() {
+    const { location: { search } } = this.props;
+    const params = new URLSearchParams(search);
     return (
       <div>
         Status:
         {' '}
-        <select onChange={this.onChangeStatus}>
+        <select value={params.get('status') || '' } onChange={this.onChangeStatus}>
           <option value="">(All)</option>
           <option value="New">New</option>
           <option value="Assigned">Assigned</option>
@@ -33,4 +36,4 @@ class IssueFilter extends React.Component {
   }
 }
 
-export default withNavigate(IssueFilter);
+export default withLocation(withNavigate(IssueFilter));
