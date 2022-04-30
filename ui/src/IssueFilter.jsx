@@ -1,9 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
-function withNavigate(Component) {
-  return props => <Component {...props} navigate={useNavigate()} />;
-}
+import { withNavigate } from './RouterFunctions.js';
 
 class IssueFilter extends React.Component {
   constructor() {

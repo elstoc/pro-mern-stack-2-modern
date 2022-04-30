@@ -1,15 +1,11 @@
 import React from 'react';
 import URLSearchParams from '@ungap/url-search-params';
-import { useLocation } from 'react-router-dom';
 
 import IssueFilter from './IssueFilter.jsx';
 import IssueTable from './IssueTable.jsx';
 import IssueAdd from './IssueAdd.jsx';
 import graphQLFetch from './graphQLFetch.js';
-
-function withLocation(Component) {
-  return props => <Component {...props} location={useLocation()} />;
-}
+import { withLocation } from './RouterFunctions.js';
 
 class IssueList extends React.Component {
   constructor() {
