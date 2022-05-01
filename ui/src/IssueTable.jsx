@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, Link, NavLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {
   Button, Tooltip, OverlayTrigger, Table,
 } from 'react-bootstrap';
@@ -14,15 +14,6 @@ function IssueRow({
 }) {
   const { search } = useLocation();
   const selectLocation = { pathname: `/issues/${issue.id}`, search };
-  const editTooltip = (
-    <Tooltip id="close-tooltip" placement="top">Edit Issue</Tooltip>
-  );
-  const closeTooltip = (
-    <Tooltip id="close-tooltip" placement="top">Close Issue</Tooltip>
-  );
-  const deleteTooltip = (
-    <Tooltip id="delete-tooltip" placement="top">Delete Issue</Tooltip>
-  );
 
   function onClose(e) {
     e.preventDefault();
@@ -46,7 +37,10 @@ function IssueRow({
       <td>
         <LinkContainer to={`/edit/${issue.id}`}>
           <span>
-            <OverlayTrigger delayShow={1000} overlay={editTooltip}>
+            <OverlayTrigger
+              delayShow={1000}
+              overlay={<Tooltip id="close-tooltip" placement="top">Edit Issue</Tooltip>}
+            >
               <Button size="sm">
                 <FaEdit size="1.2em" />
               </Button>
@@ -54,13 +48,19 @@ function IssueRow({
           </span>
         </LinkContainer>
         {' '}
-        <OverlayTrigger delayShow={1000} overlay={closeTooltip}>
+        <OverlayTrigger
+          delayShow={1000}
+          overlay={<Tooltip id="close-tooltip" placement="top">Close Issue</Tooltip>}
+        >
           <Button size="sm" onClick={onClose}>
             <FaRegWindowClose size="1.2em" />
           </Button>
         </OverlayTrigger>
         {' '}
-        <OverlayTrigger delayShow={1000} overlay={deleteTooltip}>
+        <OverlayTrigger
+          delayShow={1000}
+          overlay={<Tooltip id="delete-tooltip" placement="top">Delete Issue</Tooltip>}
+        >
           <Button size="sm" onClick={onDelete}>
             <FaRegTrashAlt size="1.2em" />
           </Button>

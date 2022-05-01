@@ -1,7 +1,7 @@
 import React from 'react';
 import URLSearchParams from '@ungap/url-search-params';
 import Button from 'react-bootstrap/Button';
-import { withNavigate, withLocation } from './RouterFunctions.js';
+import { withNavigate, withLocation } from './RouterFunctions.jsx';
 
 class IssueFilter extends React.Component {
   constructor({ location: { search } }) {

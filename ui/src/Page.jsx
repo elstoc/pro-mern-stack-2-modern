@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Nav, Navbar, OverlayTrigger, Tooltip, Container, NavDropdown,
 } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import { FaPlus, FaAlignJustify } from 'react-icons/fa';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withParams } from './RouterFunctions.js';
+import { withParams } from './RouterFunctions.jsx';
 
 import graphQLFetch from './graphQLFetch.js';
 

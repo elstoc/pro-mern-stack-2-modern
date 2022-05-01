@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { withParams } from './RouterFunctions.js';
+import { withParams } from './RouterFunctions.jsx';
 
 import graphQLFetch from './graphQLFetch.js';
 import NumInput from './NumInput.jsx';
@@ -29,14 +29,6 @@ class IssueEdit extends React.Component {
     if (id !== prevId) {
       this.loadData();
     }
-  }
-
-  onChange(event, naturalValue) {
-    const { name, value: textValue } = event.target;
-    const value = naturalValue === undefined ? textValue : naturalValue;
-    this.setState((prevState) => ({
-      issue: { ...prevState.issue, [name]: value },
-    }));
   }
 
   onValidityChange(event, valid) {
@@ -70,6 +62,14 @@ class IssueEdit extends React.Component {
       this.setState({ issue: data.issueUpdate });
       alert('Updated issue successfully'); // eslint-disable-line no-alert
     }
+  }
+
+  onChange(event, naturalValue) {
+    const { name, value: textValue } = event.target;
+    const value = naturalValue === undefined ? textValue : naturalValue;
+    this.setState((prevState) => ({
+      issue: { ...prevState.issue, [name]: value },
+    }));
   }
 
   async loadData() {
