@@ -11,7 +11,7 @@ import Contents from './Contents.jsx';
 function NavBar() {
   return (
     <Navbar>
-      <Container>
+      <Container fluid>
         <Navbar.Brand>Issue Tracker</Navbar.Brand>
         <Nav className="justify-content-start">
           <LinkContainer to="/">
