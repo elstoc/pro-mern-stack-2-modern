@@ -32,7 +32,7 @@ class IssueEdit extends React.Component {
   }
 
   onChange(event, naturalValue) {
-    const { name, textValue } = event.target;
+    const { name, value: textValue } = event.target;
     const value = naturalValue === undefined ? textValue : naturalValue;
     this.setState(prevState => ({
       issue: { ...prevState.issue, [name]: value },

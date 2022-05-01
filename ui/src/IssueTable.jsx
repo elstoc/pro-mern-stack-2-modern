@@ -2,7 +2,10 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
 
-function IssueRow({ issue }) {
+function IssueRow({ issue, 
+  closeIssue, 
+  index, 
+}) {
   const { search } = useLocation();
   const selectLocation = { pathname: `/issues/${issue.id}`, search };
   return (
@@ -18,14 +21,23 @@ function IssueRow({ issue }) {
         <Link to={`/edit/${issue.id}`}>Edit</Link>
         {' | '}
         <NavLink to={selectLocation}>Select</NavLink>
+        {' | '}
+        <button type="button" onClick={() => { closeIssue(index); }}>
+          Close
+        </button>
       </td>
     </tr>
   );
 }
 
-export default function IssueTable({ issues }) {
-  const issueRows = issues.map((issue) => (
-    <IssueRow key={issue.id} issue={issue} />
+export default function IssueTable({ issues, closeIssue }) {
+  const issueRows = issues.map((issue, index) => (
+    <IssueRow 
+      key={issue.id} 
+      issue={issue} 
+      closeIssue={closeIssue}
+      index={index}
+    />
   ));
 
   return (
