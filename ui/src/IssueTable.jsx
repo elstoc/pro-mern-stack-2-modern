@@ -1,10 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
-import {
-  Button, Tooltip, OverlayTrigger,
-} from 'react-bootstrap';
-import { FaRegTrashAlt, FaRegWindowClose } from 'react-icons/fa';
+import { Button, Tooltip, OverlayTrigger, Table } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { FaRegTrashAlt, FaRegWindowClose, FaEdit } from 'react-icons/fa';
 
 function IssueRow({ issue, 
   closeIssue, 
@@ -13,13 +12,27 @@ function IssueRow({ issue,
 }) {
   const { search } = useLocation();
   const selectLocation = { pathname: `/issues/${issue.id}`, search };
+  const editTooltip = (
+    <Tooltip id="close-tooltip" placement="top">Edit Issue</Tooltip>
+  );
   const closeTooltip = (
     <Tooltip id="close-tooltip" placement="top">Close Issue</Tooltip>
   );
   const deleteTooltip = (
     <Tooltip id="delete-tooltip" placement="top">Delete Issue</Tooltip>
   );
-  return (
+
+  function onClose(e) {
+    e.preventDefault();
+    closeIssue(index);
+  }
+
+  function onDelete(e) {
+    e.preventDefault();
+    deleteIssue(index);
+  }
+
+  const tableRow = (
     <tr>
       <td>{issue.id}</td>
       <td>{issue.status}</td>
@@ -29,23 +42,33 @@ function IssueRow({ issue,
       <td>{issue.due ? issue.due.toDateString() : ''}</td>
       <td>{issue.title}</td>
       <td>
-        <Link to={`/edit/${issue.id}`}>Edit</Link>
-        {' | '}
-        <NavLink to={selectLocation}>Select</NavLink>
-        {' | '}
+        <LinkContainer to={`/edit/${issue.id}`}>
+          <OverlayTrigger delayShow={1000} overlay={editTooltip}>
+            <Button size="sm">
+              <FaEdit size="1.2em" />
+            </Button>
+          </OverlayTrigger>
+        </LinkContainer>
+        {' '}
         <OverlayTrigger delayShow={1000} overlay={closeTooltip}>
-          <Button size="sm" onClick={() => { closeIssue(index); }}>
+          <Button size="sm" onClick={onClose}>
             <FaRegWindowClose size="1.2em" />
           </Button>
         </OverlayTrigger>
         {' '}
         <OverlayTrigger delayShow={1000} overlay={deleteTooltip}>
-          <Button size="sm" onClick={() => { deleteIssue(index); }}>
+          <Button size="sm" onClick={onDelete}>
             <FaRegTrashAlt size="1.2em" />
           </Button>
         </OverlayTrigger>
       </td>
     </tr>
+  );
+  
+  return (
+    <LinkContainer to={selectLocation}>
+      {tableRow}
+    </LinkContainer>
   );
 }
 
@@ -61,7 +84,7 @@ export default function IssueTable({ issues, closeIssue, deleteIssue }) {
   ));
 
   return (
-    <table className="bordered-table">
+    <Table bordered size="sm" hover responsive>
       <thead>
         <tr>
           <th>ID</th>
@@ -77,6 +100,6 @@ export default function IssueTable({ issues, closeIssue, deleteIssue }) {
       <tbody>
         {issueRows}
       </tbody>
-    </table>
+    </Table>
   );
 }
