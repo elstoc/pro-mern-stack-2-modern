@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 function IssueRow({ issue, 
   closeIssue, 
+  deleteIssue,
   index, 
 }) {
   const { search } = useLocation();
@@ -25,17 +26,21 @@ function IssueRow({ issue,
         <button type="button" onClick={() => { closeIssue(index); }}>
           Close
         </button>
+        <button type="button" onClick={() => { deleteIssue(index); }}>
+          Delete
+        </button>
       </td>
     </tr>
   );
 }
 
-export default function IssueTable({ issues, closeIssue }) {
+export default function IssueTable({ issues, closeIssue, deleteIssue }) {
   const issueRows = issues.map((issue, index) => (
     <IssueRow 
       key={issue.id} 
       issue={issue} 
       closeIssue={closeIssue}
+      deleteIssue={deleteIssue}
       index={index}
     />
   ));
