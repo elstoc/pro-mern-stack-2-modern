@@ -23,14 +23,13 @@ class IssueDetail extends React.Component {
 
   async loadData() {
     const { params: { id } } = this.props;
-    const intId = Number(id);
     const query = `query issue($id: Int!) {
       issue (id: $id) {
         id description
       }
     }`;
 
-    const data = await graphQLFetch(query, { id: intId });
+    const data = await graphQLFetch(query, { id: parseInt(id) });
     if (data) {
       this.setState({ issue: data.issue });
     } else {
