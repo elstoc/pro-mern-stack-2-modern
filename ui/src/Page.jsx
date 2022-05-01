@@ -36,6 +36,7 @@ function NavBar() {
             id="user-dropdown"
             title={<FaAlignJustify size="1.2em" />}
             className="noCaret"
+            align="end"
           >
             <NavDropdown.Item>About</NavDropdown.Item>
           </NavDropdown>
