@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import {
   Button, Tooltip, OverlayTrigger,
 } from 'react-bootstrap';
+import { FaRegTrashAlt, FaRegWindowClose } from 'react-icons/fa';
 
 function IssueRow({ issue, 
   closeIssue, 
@@ -34,13 +35,13 @@ function IssueRow({ issue,
         {' | '}
         <OverlayTrigger delayShow={1000} overlay={closeTooltip}>
           <Button size="sm" onClick={() => { closeIssue(index); }}>
-            Close
+            <FaRegWindowClose size="1.2em" />
           </Button>
         </OverlayTrigger>
         {' '}
         <OverlayTrigger delayShow={1000} overlay={deleteTooltip}>
           <Button size="sm" onClick={() => { deleteIssue(index); }}>
-            Delete
+            <FaRegTrashAlt size="1.2em" />
           </Button>
         </OverlayTrigger>
       </td>
