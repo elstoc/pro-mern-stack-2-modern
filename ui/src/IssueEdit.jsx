@@ -4,15 +4,18 @@ import { withParams } from './RouterFunctions.js';
 
 import graphQLFetch from './graphQLFetch.js';
 import NumInput from './NumInput.jsx';
+import DateInput from './DateInput.jsx';
 
 class IssueEdit extends React.Component {
   constructor() {
     super();
     this.state = {
       issue: {},
+      invalidFields: {},
     };
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onValidityChange = this.onValidityChange.bind(this);
   }
 
   componentDidMount() {
@@ -29,10 +32,20 @@ class IssueEdit extends React.Component {
 
   onChange(event, naturalValue) {
     const { name, textValue } = event.target;
-    const value = naturalValue === undefined ? textValue : naturalValue;
+    let value = naturalValue === undefined ? textValue : naturalValue;
+    value = value === null ? '' : value;
     this.setState(prevState => ({
       issue: { ...prevState.issue, [name]: value },
     }));
+  }
+
+  onValidityChange(event, valid) {
+    const { name } = event.target;
+    this.setState((prevState) => {
+      const invalidFields = { ...prevState.invalidFields, [name]: !valid };
+      if (valid) delete invalidFields[name];
+      return { invalidFields };
+    });
   }
 
   handleSubmit(e) {
@@ -56,9 +69,9 @@ class IssueEdit extends React.Component {
       issue.due = issue.due ? issue.due.toDateString() : '';
       issue.owner = issue.owner != null ? issue.owner : '';
       issue.description = issue.description != null ? issue.description : '';
-      this.setState({ issue });
+      this.setState({ issue, invalidFields: {} });
     } else {
-      this.setState({ issue: {} });
+      this.setState({ issue: {}, invalidFields: {} });
     }
   }
 
@@ -70,6 +83,16 @@ class IssueEdit extends React.Component {
         return <h3>{`Issue with ID ${propsId} not found.`}</h3>;
       }
       return null;
+    }
+
+    const { invalidFields } = this.state;
+    let validationMessage;
+    if (Object.keys(invalidFields).length !== 0) {
+      validationMessage = (
+        <div className="error">
+          Please correct invalid fields before submitting.
+        </div>
+      );
     }
 
     const { issue: { title, status } } = this.state;
@@ -120,10 +143,12 @@ class IssueEdit extends React.Component {
             <tr>
               <td>Due:</td>
               <td>
-                <input
+                <DateInput
                   name="due"
                   value={due}
                   onChange={this.onChange}
+                  onValidityChange={this.onValidityChange}
+                  key={id}
                 />
               </td>
             </tr>
@@ -156,6 +181,7 @@ class IssueEdit extends React.Component {
             </tr>
           </tbody>
         </table>
+        {validationMessage}
         <Link to={`/edit/${id - 1}`}>Prev</Link>
         {' | '}
         <Link to={`/edit/${id + 1}`}>Next</Link>
