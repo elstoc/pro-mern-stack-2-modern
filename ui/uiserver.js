@@ -41,7 +41,7 @@ app.get('/env.js', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-   res.sendFile(path.resolve('public/index.html'));
+  res.sendFile(path.resolve('public/index.html'));
 });
 
 const port = process.env.UI_SERVER_PORT || 8000;

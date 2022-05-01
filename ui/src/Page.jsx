@@ -1,5 +1,5 @@
 import React from 'react';
-import { 
+import {
   Nav, Navbar, OverlayTrigger, Tooltip, Container, NavDropdown,
 } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
@@ -13,34 +13,34 @@ function NavBar() {
   return (
     <Navbar>
       <Container>
-      <Navbar.Brand>Issue Tracker</Navbar.Brand>
-      <Nav className="justify-content-start">
-        <LinkContainer to="/">
-          <Nav.Link>Home</Nav.Link>
-        </LinkContainer>
-        <LinkContainer to="/issues">
-          <Nav.Link>Issue List</Nav.Link>
-        </LinkContainer>
-        <LinkContainer to="/report">
-          <Nav.Link>Report</Nav.Link>
-        </LinkContainer>
-      </Nav>
-      <Navbar className="justify-content-end">
-        <OverlayTrigger
-          placement="left"
-          delay={{ show: 1000, hide: 400 }}
-          overlay={<Tooltip id="create-issue">Create Issue</Tooltip>}
-        >
-          <div><FaPlus size="1.2em" /></div>
-        </OverlayTrigger>
-        <NavDropdown
-          id="user-dropdown"
-          title={<FaAlignJustify size="1.2em" />}
-          className="noCaret"
-        >
-          <NavDropdown.Item>About</NavDropdown.Item>
-        </NavDropdown>
-      </Navbar>
+        <Navbar.Brand>Issue Tracker</Navbar.Brand>
+        <Nav className="justify-content-start">
+          <LinkContainer to="/">
+            <Nav.Link>Home</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/issues">
+            <Nav.Link>Issue List</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/report">
+            <Nav.Link>Report</Nav.Link>
+          </LinkContainer>
+        </Nav>
+        <Navbar className="justify-content-end">
+          <OverlayTrigger
+            placement="left"
+            delay={{ show: 1000, hide: 400 }}
+            overlay={<Tooltip id="create-issue">Create Issue</Tooltip>}
+          >
+            <div><FaPlus size="1.2em" /></div>
+          </OverlayTrigger>
+          <NavDropdown
+            id="user-dropdown"
+            title={<FaAlignJustify size="1.2em" />}
+            className="noCaret"
+          >
+            <NavDropdown.Item>About</NavDropdown.Item>
+          </NavDropdown>
+        </Navbar>
       </Container>
     </Navbar>
   );

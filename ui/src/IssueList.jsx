@@ -121,7 +121,7 @@ class IssueList extends React.Component {
   render() {
     const { issues } = this.state;
     return (
-      <React.Fragment>
+      <>
         <Accordion>
           <Accordion.Item eventKey="0">
             <Accordion.Header>Filter</Accordion.Header>
@@ -140,9 +140,9 @@ class IssueList extends React.Component {
         <IssueAdd createIssue={this.createIssue} />
         <hr />
         <Routes>
-          <Route path=':id' element={<IssueDetail />} />
+          <Route path=":id" element={<IssueDetail />} />
         </Routes>
-      </React.Fragment>
+      </>
     );
   }
 }

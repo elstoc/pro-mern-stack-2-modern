@@ -1,14 +1,16 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { Link, NavLink } from 'react-router-dom';
-import { Button, Tooltip, OverlayTrigger, Table } from 'react-bootstrap';
+import { useLocation, Link, NavLink } from 'react-router-dom';
+import {
+  Button, Tooltip, OverlayTrigger, Table,
+} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { FaRegTrashAlt, FaRegWindowClose, FaEdit } from 'react-icons/fa';
 
-function IssueRow({ issue, 
-  closeIssue, 
+function IssueRow({
+  issue,
+  closeIssue,
   deleteIssue,
-  index, 
+  index,
 }) {
   const { search } = useLocation();
   const selectLocation = { pathname: `/issues/${issue.id}`, search };
@@ -66,7 +68,7 @@ function IssueRow({ issue,
       </td>
     </tr>
   );
-  
+
   return (
     <LinkContainer to={selectLocation}>
       {tableRow}
@@ -76,9 +78,9 @@ function IssueRow({ issue,
 
 export default function IssueTable({ issues, closeIssue, deleteIssue }) {
   const issueRows = issues.map((issue, index) => (
-    <IssueRow 
-      key={issue.id} 
-      issue={issue} 
+    <IssueRow
+      key={issue.id}
+      issue={issue}
       closeIssue={closeIssue}
       deleteIssue={deleteIssue}
       index={index}

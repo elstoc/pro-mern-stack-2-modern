@@ -34,4 +34,3 @@ export default class IssueAdd extends React.Component {
 IssueAdd.propTypes = {
   createIssue: PropTypes.func.isRequired,
 };
-
