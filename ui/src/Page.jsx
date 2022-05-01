@@ -14,7 +14,7 @@ function NavBar() {
     <Navbar>
       <Container>
       <Navbar.Brand>Issue Tracker</Navbar.Brand>
-      <Navbar className="justify-content-start">
+      <Nav className="justify-content-start">
         <LinkContainer to="/">
           <Nav.Link>Home</Nav.Link>
         </LinkContainer>
@@ -24,7 +24,7 @@ function NavBar() {
         <LinkContainer to="/report">
           <Nav.Link>Report</Nav.Link>
         </LinkContainer>
-      </Navbar>
+      </Nav>
       <Navbar className="justify-content-end">
         <OverlayTrigger
           placement="left"
