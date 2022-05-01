@@ -1,13 +1,11 @@
 import React from 'react';
 
 function displayFormat(date) {
-  const newdate = new Date(date);
-  return (date != '' && date != null) ? newdate.toDateString() : '';
+  return (date != null) ? date.toDateString() : '';
 }
 
 function editFormat(date) {
-  const newdate = new Date(date);
-  return (date != '' && date != null) ? newdate.toISOString().substr(0, 10) : '';
+  return (date != null) ? date.toISOString().substr(0, 10) : '';
 }
 
 function unformat(str) {
