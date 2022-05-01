@@ -10,7 +10,7 @@ import Contents from './Contents.jsx';
 
 function NavBar() {
   return (
-    <Navbar>
+    <Navbar bg="light">
       <Container fluid>
         <Navbar.Brand>Issue Tracker</Navbar.Brand>
         <Nav className="justify-content-start">
