@@ -1,6 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link, NavLink } from 'react-router-dom';
+import {
+  Button, Tooltip, OverlayTrigger,
+} from 'react-bootstrap';
 
 function IssueRow({ issue, 
   closeIssue, 
@@ -9,6 +12,12 @@ function IssueRow({ issue,
 }) {
   const { search } = useLocation();
   const selectLocation = { pathname: `/issues/${issue.id}`, search };
+  const closeTooltip = (
+    <Tooltip id="close-tooltip" placement="top">Close Issue</Tooltip>
+  );
+  const deleteTooltip = (
+    <Tooltip id="delete-tooltip" placement="top">Delete Issue</Tooltip>
+  );
   return (
     <tr>
       <td>{issue.id}</td>
@@ -23,12 +32,17 @@ function IssueRow({ issue,
         {' | '}
         <NavLink to={selectLocation}>Select</NavLink>
         {' | '}
-        <button type="button" onClick={() => { closeIssue(index); }}>
-          Close
-        </button>
-        <button type="button" onClick={() => { deleteIssue(index); }}>
-          Delete
-        </button>
+        <OverlayTrigger delayShow={1000} overlay={closeTooltip}>
+          <Button size="sm" onClick={() => { closeIssue(index); }}>
+            Close
+          </Button>
+        </OverlayTrigger>
+        {' '}
+        <OverlayTrigger delayShow={1000} overlay={deleteTooltip}>
+          <Button size="sm" onClick={() => { deleteIssue(index); }}>
+            Delete
+          </Button>
+        </OverlayTrigger>
       </td>
     </tr>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import URLSearchParams from '@ungap/url-search-params';
+import Button from 'react-bootstrap/Button';
 import { withNavigate, withLocation } from './RouterFunctions.js';
 
 class IssueFilter extends React.Component {
@@ -97,15 +98,17 @@ class IssueFilter extends React.Component {
           onChange={this.onChangeEffortMax}
         />
         {' '}
-        <button type="button" onClick={this.applyFilter}>Apply</button>
+        <Button bstyle="primary" type="button" onClick={this.applyFilter}>
+          Apply
+        </Button>
         {' '}
-        <button
+        <Button
           type="button"
           onClick={this.showOriginalFilter}
           disabled={!changed}
         >
           Reset
-        </button>
+        </Button>
       </div>
     );
   }
