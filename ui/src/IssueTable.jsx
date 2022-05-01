@@ -43,11 +43,13 @@ function IssueRow({ issue,
       <td>{issue.title}</td>
       <td>
         <LinkContainer to={`/edit/${issue.id}`}>
-          <OverlayTrigger delayShow={1000} overlay={editTooltip}>
-            <Button size="sm">
-              <FaEdit size="1.2em" />
-            </Button>
-          </OverlayTrigger>
+          <span>
+            <OverlayTrigger delayShow={1000} overlay={editTooltip}>
+              <Button size="sm">
+                <FaEdit size="1.2em" />
+              </Button>
+            </OverlayTrigger>
+          </span>
         </LinkContainer>
         {' '}
         <OverlayTrigger delayShow={1000} overlay={closeTooltip}>
