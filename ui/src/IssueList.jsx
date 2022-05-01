@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import URLSearchParams from '@ungap/url-search-params';
+import { Accordion, Card } from 'react-bootstrap';
 
 import IssueFilter from './IssueFilter.jsx';
 import IssueTable from './IssueTable.jsx';
@@ -121,7 +122,14 @@ class IssueList extends React.Component {
     const { issues } = this.state;
     return (
       <React.Fragment>
-        <IssueFilter />
+        <Accordion>
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>Filter</Accordion.Header>
+            <Accordion.Body>
+              <IssueFilter />
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
         <hr />
         <IssueTable
           issues={issues}
