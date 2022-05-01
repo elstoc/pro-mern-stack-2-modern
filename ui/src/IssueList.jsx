@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import Badge from 'react-bootstrap/Badge';
 import URLSearchParams from '@ungap/url-search-params';
 
 import IssueFilter from './IssueFilter.jsx';
@@ -121,7 +122,7 @@ class IssueList extends React.Component {
     const { issues } = this.state;
     return (
       <React.Fragment>
-        <h1>Issue Tracker</h1>
+        <h1><Badge>Issue Tracker</Badge></h1>
         <IssueFilter />
         <hr />
         <IssueTable
