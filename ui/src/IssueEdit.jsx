@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withParams } from './RouterFunctions.jsx';
+import {
+  Row, Col, Card, Form, ButtonToolbar, Button,
+} from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import graphQLFetch from './graphQLFetch.js';
 import NumInput from './NumInput.jsx';
@@ -110,96 +114,120 @@ class IssueEdit extends React.Component {
     const { issue: { created, due } } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h3>{`Editing issue: ${id}`}</h3>
-        <table>
-          <tbody>
-            <tr>
-              <td>Created:</td>
-              <td>{created.toDateString()}</td>
-            </tr>
-            <tr>
-              <td>Status:</td>
-              <td>
-                <select name="status" value={status} onChange={this.onChange}>
+      <Card>
+        <Card.Header>
+          <Card.Title>{`Editing issue: ${id}`}</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <Form onSubmit={this.handleSubmit} className='edit-form'>
+            <Form.Group as={Row}>
+              <Col as={Form.Label} sm={3}>Created</Col>
+              <Col sm={9}>
+                <Form.Control as={TextInput} value={created.toDateString()} readOnly />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row}>
+              <Col as={Form.Label} sm={3}>Status</Col>
+              <Col sm={9}>
+                <Form.Control
+                  as={Form.Select}
+                  name="status"
+                  value={status}
+                  onChange={this.onChange}
+                >
                   <option value="New">New</option>
                   <option value="Assigned">Assigned</option>
                   <option value="Fixed">Fixed</option>
                   <option value="Closed">Closed</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td>Owner:</td>
-              <td>
-                <TextInput
+                </Form.Control>
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row}>
+              <Col as={Form.Label} sm={3}>Owner</Col>
+              <Col sm={9}>
+                <Form.Control
+                  as={TextInput}
                   name="owner"
                   value={owner}
                   onChange={this.onChange}
                   key={id}
                 />
-              </td>
-            </tr>
-            <tr>
-              <td>Effort:</td>
-              <td>
-                <NumInput
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row}>
+              <Col as={Form.Label} sm={3}>Effort</Col>
+              <Col sm={9}>
+                <Form.Control
+                  as={NumInput}
                   name="effort"
                   value={effort}
                   onChange={this.onChange}
                   key={id}
                 />
-              </td>
-            </tr>
-            <tr>
-              <td>Due:</td>
-              <td>
-                <DateInput
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row}>
+              <Col as={Form.Label} sm={3}>Due</Col>
+              <Col sm={9}>
+                <Form.Control
+                  as={DateInput}
+                  onValidityChange={this.onValidityChange}
                   name="due"
                   value={due}
                   onChange={this.onChange}
-                  onValidityChange={this.onValidityChange}
+                  isInvalid={invalidFields.due}
                   key={id}
                 />
-              </td>
-            </tr>
-            <tr>
-              <td>Title:</td>
-              <td>
-                <TextInput
+                <Form.Control.Feedback />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row}>
+              <Col as={Form.Label} sm={3}>Title</Col>
+              <Col sm={9}>
+                <Form.Control
+                  as={TextInput}
                   size={50}
                   name="title"
                   value={title}
                   onChange={this.onChange}
                   key={id}
                 />
-              </td>
-            </tr>
-            <tr>
-              <td>Description:</td>
-              <td>
-                <TextInput
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row}>
+              <Col as={Form.Label} sm={3}>Description</Col>
+              <Col sm={9}>
+                <Form.Control
+                  as={TextInput}
                   tag="textarea"
-                  rows={8}
+                  rows={4}
                   cols={50}
                   name="description"
                   value={description}
                   onChange={this.onChange}
                   key={id}
                 />
-              </td>
-            </tr>
-            <tr>
-              <td />
-              <td><button type="submit">Submit</button></td>
-            </tr>
-          </tbody>
-        </table>
-        {validationMessage}
-        <Link to={`/edit/${id - 1}`}>Prev</Link>
-        {' | '}
-        <Link to={`/edit/${id + 1}`}>Next</Link>
-      </form>
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row}>
+              <Col sm={{span: 3, offset: 3}}>
+                <ButtonToolbar>
+                  <Button variant="primary" type="submit">Submit</Button>
+                  <LinkContainer to="/issues">
+                    <Button variant="link">Back</Button>
+                  </LinkContainer>
+                </ButtonToolbar>
+              </Col>
+            </Form.Group>
+          </Form>
+          {validationMessage}
+        </Card.Body>
+        <Card.Footer>
+          <Link to={`/edit/${id - 1}`}>Prev</Link>
+          {' | '}
+          <Link to={`/edit/${id + 1}`}>Next</Link>
+        </Card.Footer>
+      </Card>
     );
   }
 }
