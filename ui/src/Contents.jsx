@@ -12,7 +12,7 @@ function NotFound() {
 
 export default function Contents() {
   return (
-    <Container fluid>
+    <Container>
       <Routes>
         <Route path="/issues/*" element={<IssueList />} />
         <Route path="/report" element={<IssueReport />} />
