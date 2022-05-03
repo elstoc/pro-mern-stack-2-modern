@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Nav, Navbar, OverlayTrigger, Tooltip, Container, NavDropdown,
+  Nav, Navbar, OverlayTrigger, Tooltip, Container, NavDropdown, 
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -13,7 +13,7 @@ function NavBar() {
     <Navbar bg="light">
       <Container>
         <Navbar.Brand>Issue Tracker</Navbar.Brand>
-        <Nav className="justify-content-start">
+        <Navbar.Collapse>
           <LinkContainer to="/">
             <Nav.Link>Home</Nav.Link>
           </LinkContainer>
@@ -23,7 +23,7 @@ function NavBar() {
           <LinkContainer to="/report">
             <Nav.Link>Report</Nav.Link>
           </LinkContainer>
-        </Nav>
+        </Navbar.Collapse>
         <Navbar className="justify-content-end">
           <OverlayTrigger
             placement="left"
